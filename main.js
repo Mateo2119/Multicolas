@@ -2,8 +2,6 @@ let colaListo = new Cola();
 let aux = 0;
 let llegada = 0;
 
-
-
 function agregar1(){
     letra = String.fromCharCode(65+aux);
     aux++;    
@@ -32,7 +30,8 @@ function agregar3(){
 }
 
 function mostrarAlgoritmo(){
-    imprimirTabla();
+    colaListo.atender();
+    //imprimirTabla();
 }
 
 function mostrarDiagrama(){
