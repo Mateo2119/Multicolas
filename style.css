@@ -1,0 +1,21 @@
+body{
+    background-color: black;
+    color: white;
+}
+
+.containers{
+    margin-top: 20px;
+}
+.tabla{
+    width: 100%;
+    border: 1px solid gray;
+}
+th,td{
+    border: 1px solid gray;
+}
+.tabla-usuario{
+    width: 100%;
+}
+.tabla-fcfs{
+    width: 100%;
+}

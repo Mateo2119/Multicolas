@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>FCFS - Mateo Nariño</title>
+</head>
+<body>    
+    <div class="jumbotron text-center">
+        <h1>Algoritmo FCFS</h1>
+        <p>Andres Mateo Nariño Rodriguez</p> 
+    </div>    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm botones text-center">
+                <button type="button" id="start" class="btn btn-primary" onclick="iniciar()">Agregar procesos</button>
+                <!--<button type="button" id="atender" class="btn btn-primary" onclick="tabla()">Crear Tabla</button>
+                <button type="button" id="añadir" class="btn btn-primary" onclick="diagrama()">Diagrama</button>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 containers text-center">
+                <!--Aqui se insertan los listos-->
+                <table class="table table-striped table-dark table-bordered table-hover tabla-usuario">
+                    <thead>
+                        <th>Proceso</th>
+                        <th>Rafaga</th>
+                        <th>T. llegada</th>
+                    </thead>
+                    <tbody id="listoB">
+    
+                    </tbody>
+                </table>
+            </div>
+            <!--TABLA DEL ALGORITMO-->
+            <div class="col-md-8 containers text-center">
+                <table class="table table-striped table-dark table-bordered table-hover tabla-fcfs" id="tabla">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>T. Proceso</th>
+                            <th>T. Rafaga</th>
+                            <th>T. LLegada</th>
+                            <th>T. Comienzo</th>
+                            <th>T. Final</th>
+                            <th>T. Retorno</th>
+                            <th>T. Espera</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">                  
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+        <!--DIAGRAMA-->
+        <div class="row">
+            <div class="col-sm containers"style="margin-bottom: 40px;">
+                <table id="tblDiagrama" class="tabla">
+                    <thead id="headD">
+                        
+                    </thead>
+                    <tbody id="bodyD">
+    
+                    </tbody>
+                    <!--Tabla xd-->
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--Javascript-->  
+    <script src="cola.js"></script>
+    <script src="helper.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
