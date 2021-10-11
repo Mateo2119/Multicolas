@@ -4,7 +4,11 @@ function imprimirListos(){
     let actual = colaListo.head;
     let usuario = ""; 
     while(actual){
-        tabla.innerHTML += "<td>"+actual.value+"</td>"+"<td>"+actual.procesos+"</td>"+"<td>"+actual.llegada+"</td>";
+        tabla.innerHTML += "<td>"+actual.value+"</td>"+
+        "<td>"+actual.procesos+"</td>"+
+        "<td>"+actual.llegada+"</td>"+
+        "<td>"+actual.algoritmo+"</td>"+
+        "<td>"+actual.prioridad+"</td>";
         actual = actual.next;
     }    
 }
@@ -25,7 +29,8 @@ function imprimirTabla(){
         "<td>"+actual.comienzo+"</td>"+
         "<td>"+actual.final+"</td>"+
         "<td>"+actual.retorno+"</td>"+
-        "<td>"+actual.espera+"</td>";
+        "<td>"+actual.espera+"</td>"+
+        "<td>"+actual.algoritmo+"</td>";
         //Fin
         actual = actual.next;
     }

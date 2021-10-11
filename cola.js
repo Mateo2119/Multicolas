@@ -1,8 +1,12 @@
+var final = 0;
+
 class Nodo{
-    constructor(value,procesos,llegada,comienzo,final,retorno,espera){
+    constructor(value,procesos,llegada,algoritmo,prioridad,comienzo,final,retorno,espera){
     this.value = value;
     this.procesos = procesos;
     this.llegada = llegada;
+    this.algoritmo = algoritmo;
+    this.prioridad = prioridad;
     this.comienzo = comienzo;
     this.final = final;
     this.retorno = retorno;
@@ -11,7 +15,6 @@ class Nodo{
     }
 }
 
-var final = 0;
 class Cola{
     constructor(){
         this.head = null;
@@ -20,12 +23,12 @@ class Cola{
         this.restantes = 5;      
     };
 
-    insertar(value,procesos,llegada){
+    insertar(value,procesos,llegada,algoritmo,prioridad){
         final += procesos;
         let comienzo = final-procesos;
         let retorno = final - llegada;
         let espera = retorno - procesos;
-        const nodo = new Nodo(value, procesos,llegada,comienzo,final,retorno,espera);
+        const nodo = new Nodo(value, procesos,llegada,algoritmo,prioridad,comienzo,final,retorno,espera);
 
         if(this.head){
             this.tail.next = nodo;
