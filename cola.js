@@ -56,19 +56,19 @@ class Cola{
                     actual.procesos--;
                     this.restantes--;                
                     this.atenderRoundRobin();
-                    console.log("procesos: " + actual.procesos);
+                    //console.log("procesos: " + actual.procesos);
                     imprimirListos();
                 }else{ //Si se supera el limite de transacciones
-                    console.log("no se puede atender más");
+                    //console.log("no se puede atender más");
                     this.insertar(actual.value,actual.procesos,actual.llegada,actual.algoritmo,actual.prioridad);
                     this.eliminar();
                     this.restantes = 5;              
-                    this.atenderRoundRobin();
+                    this.atender();
                 }
             } else { //ATIENDE AL SIGUIENTE
                 this.restantes = 5;
                 this.eliminar();
-                this.atenderRoundRobin();
+                this.atender();
             }
         }        
     }
@@ -79,11 +79,11 @@ class Cola{
             await delay(1);
             actual.procesos--;
             this.atenderFCFS();
-            console.log("procesos: " + actual.procesos);
+            //console.log("procesos: " + actual.procesos);
             imprimirListos();
         }else{
             this.eliminar();
-            this.atenderFCFS();
+            this.atender();
         }
     }
 
@@ -93,11 +93,11 @@ class Cola{
             await delay(1);
             actual.procesos--;
             this.atenderSJF();
-            console.log("procesos: " + actual.procesos);
+            //console.log("procesos: " + actual.procesos);
             imprimirListos();
         }else{
             this.eliminar();
-            this.atenderSJF();
+            this.atender();
         }
     }
 
@@ -106,19 +106,19 @@ class Cola{
         if(this.length>0){
             let actual = this.head;
             if(actual.prioridad==1){
-                alert("Atendiendo Round Robin");
+                console.log("Atendiendo Round Robin");
                 this.atenderRoundRobin();
             }
             if(actual.prioridad==2){
-                alert("Atendiendo SJF");
+                console.log("Atendiendo SJF");
                 this.atenderSJF();
             }
             if(actual.prioridad==3){
-                alert("Atendiendo FCFS");
+                console.log("Atendiendo FCFS");
                 this.atenderFCFS();
             }
         }else{
-            alert("Vacia webon");
+            alert("Vacia");
         }       
     }
 

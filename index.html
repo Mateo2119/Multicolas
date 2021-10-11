@@ -18,9 +18,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm botones text-center">
-                <button type="button" id="start" class="btn btn-primary" onclick="agregar3()">Agregar FCFS</button>
-                <button type="button" id="atender" class="btn btn-primary" onclick="agregar2()">Agregar SJF</button>
-                <button type="button" id="añadir" class="btn btn-primary" onclick="agregar1()">Agregar Round Robin</button>
+                <button type="button" id="añadir" class="btn btn-primary" onclick="agregar('R.Robin',1)">Agregar Round Robin</button>
+                <button type="button" id="atender" class="btn btn-primary" onclick="agregar('SJF',2)">Agregar SJF</button>
+                <button type="button" id="start" class="btn btn-primary" onclick="agregar('FCFS',3)">Agregar FCFS</button>                
             </div>
         </div>
         <div class="row">
@@ -32,6 +32,7 @@
         <div class="row">
             <div class="col-md-5 containers text-center">
                 <!--Aqui se insertan los listos-->
+                <h3>Cola de listos.</h3>
                 <table class="table table-striped table-dark table-bordered table-hover tabla-usuario">
                     <thead>
                         <th>Proceso</th>
@@ -47,6 +48,7 @@
             </div>
             <!--TABLA DEL ALGORITMO-->
             <div class="col-md-7 containers text-center">
+                <h3>Tiempos.</h3>
                 <table class="table table-striped table-dark table-bordered table-hover tabla-fcfs" id="tabla">
                     <thead class="thead-light">
                         <tr>
