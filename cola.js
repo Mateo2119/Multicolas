@@ -121,16 +121,18 @@ class Cola{
         }
     }
 
-    async atender(){
-        imprimirListos();
+    async atender(){        
         let actual = this.head;
+        imprimirListos();
         await delay(1);
         console.log("Hay: "+this.numRR+" Round Robin");
         console.log("Hay: "+this.numSJF+" SJF");
         console.log("Hay: "+this.numFCFS+" FCFS");
         if(this.numRR != 0){ //SI HAY RR
             if(actual.prioridad == 1){
-                this.atenderRoundRobin();
+                imprimirTabla(actual);
+                crearDiagrama(actual);
+                this.atenderRoundRobin();                
             }else{
                 this.insertar(actual.value,actual.procesos,actual.llegada,actual.algoritmo,actual.prioridad);
                 this.eliminar();
@@ -138,6 +140,8 @@ class Cola{
             }
         }else if(this.numSJF != 0){ //SI HAY SJF
             if(actual.prioridad==2){
+                imprimirTabla(actual);
+                crearDiagrama(actual);
                 this.atenderSJF();
             }else{
                 this.insertar(actual.value,actual.procesos,actual.llegada,actual.algoritmo,actual.prioridad);
@@ -146,6 +150,8 @@ class Cola{
             }
         }else if(this.numFCFS != 0){ // SI HAY FCFS
             if(actual.prioridad==3){
+                imprimirTabla(actual);
+                crearDiagrama(actual);
                 this.atenderFCFS();
             }else{
                 console.log("prioridad desonocida");

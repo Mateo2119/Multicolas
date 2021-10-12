@@ -13,7 +13,7 @@ function imprimirListos(){
     }    
 }
 
-function imprimirTabla(){
+/* function imprimirTabla2(){
     let tabla = document.getElementById("tabla");    
     let tblBody = document.getElementById("tbody");
     tblBody.innerHTML = "";
@@ -34,9 +34,45 @@ function imprimirTabla(){
         //Fin
         actual = actual.next;
     }
+} */
+var t_final = 0;
+function imprimirTabla(Nodo){
+    let rafaga = Nodo.procesos;
+    t_final += rafaga;
+    let t_comienzo = t_final - rafaga;
+    let retorno = t_final - Nodo.llegada;
+    let espera = retorno - rafaga;
+
+    let tabla = document.getElementById("tabla");    
+    let tblBody = document.getElementById("tbody");
+    tblBody.innerHTML += 
+        "<td>"+Nodo.value+"</td>"+
+        "<td>"+Nodo.procesos+"</td>"+
+        "<td>"+Nodo.llegada+"</td>"+
+        "<td>"+t_comienzo+"</td>"+
+        "<td>"+t_final+"</td>"+
+        "<td>"+retorno+"</td>"+
+        "<td>"+espera+"</td>"+
+        "<td>"+Nodo.algoritmo+"</td>";
+    crearDiagrama(Nodo.value,Nodo.rafaga,Nodo.llegada,t_comienzo,t_final);
 }
 
-function crearDiagrama(){
+function crearDiagrama(nombre,rafaga,llegada,comienzo,final){
+    let head = document.getElementById("headD");
+    let body = document.getElementById("bodyD");
+    let info;
+    //head.innerHTML = "";
+    //body.innerHTML = "";
+    info = "<td>"+Nodo.value+"</td>";
+    for(let i=0;i<Nodo.llegada;i++){
+        info += "<td style='background-color: rgb(30, 30, 30);'></td>"; //Tiempo sin nada
+    }
+    for(let i=0;i<Nodo.llegada;i++){
+        info += "<td style='background-color: rgb(62, 84, 210);'></td>"; //Tiempo de comienzo
+    }
+}
+
+function crearDiagrama2(){
     let head = document.getElementById("headD");
     let body = document.getElementById("bodyD");
     head.innerHTML = "";
