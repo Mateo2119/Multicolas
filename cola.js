@@ -1,16 +1,12 @@
 var final = 0;
 
 class Nodo{
-    constructor(value,procesos,llegada,algoritmo,prioridad,comienzo,final,retorno,espera){
+    constructor(value,procesos,llegada,algoritmo,prioridad){
     this.value = value;
     this.procesos = procesos;
     this.llegada = llegada;
     this.algoritmo = algoritmo;
     this.prioridad = prioridad;
-    this.comienzo = comienzo;
-    this.final = final;
-    this.retorno = retorno;
-    this.espera = espera;
     this.next = null;
     }
 }
@@ -20,7 +16,7 @@ class Cola{
         this.head = null;
         this.tail = null;
         this.length = 0;
-        this.restantes = 5;
+        this.restantes = quantum;
         this.numRR = 0;
         this.numSJF = 0;
         this.numFCFS = 0;      
@@ -28,10 +24,7 @@ class Cola{
 
     insertar(value,procesos,llegada,algoritmo,prioridad){
         final += procesos;
-        let comienzo = final-procesos;
-        let retorno = final - llegada;
-        let espera = retorno - procesos;
-        const nodo = new Nodo(value, procesos,llegada,algoritmo,prioridad,comienzo,final,retorno,espera);
+        const nodo = new Nodo(value, procesos,llegada,algoritmo,prioridad);
 
         if(this.head){
             this.tail.next = nodo;
@@ -82,7 +75,7 @@ class Cola{
                     //console.log("no se puede atender más");
                     this.insertar(actual.value,actual.procesos,actual.llegada,actual.algoritmo,actual.prioridad);
                     this.eliminar();
-                    this.restantes = 5;              
+                    this.restantes = 5;                                
                     this.atender();
                 }
             } else { //ATIENDE AL SIGUIENTE
@@ -125,13 +118,9 @@ class Cola{
         let actual = this.head;
         imprimirListos();
         await delay(1);
-        console.log("Hay: "+this.numRR+" Round Robin");
-        console.log("Hay: "+this.numSJF+" SJF");
-        console.log("Hay: "+this.numFCFS+" FCFS");
         if(this.numRR != 0){ //SI HAY RR
             if(actual.prioridad == 1){
                 imprimirTabla(actual);
-                crearDiagrama(actual);
                 this.atenderRoundRobin();                
             }else{
                 this.insertar(actual.value,actual.procesos,actual.llegada,actual.algoritmo,actual.prioridad);
@@ -141,7 +130,6 @@ class Cola{
         }else if(this.numSJF != 0){ //SI HAY SJF
             if(actual.prioridad==2){
                 imprimirTabla(actual);
-                crearDiagrama(actual);
                 this.atenderSJF();
             }else{
                 this.insertar(actual.value,actual.procesos,actual.llegada,actual.algoritmo,actual.prioridad);
@@ -151,7 +139,6 @@ class Cola{
         }else if(this.numFCFS != 0){ // SI HAY FCFS
             if(actual.prioridad==3){
                 imprimirTabla(actual);
-                crearDiagrama(actual);
                 this.atenderFCFS();
             }else{
                 console.log("prioridad desonocida");
