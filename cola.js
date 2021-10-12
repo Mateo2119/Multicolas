@@ -20,7 +20,10 @@ class Cola{
         this.head = null;
         this.tail = null;
         this.length = 0;
-        this.restantes = 5;      
+        this.restantes = 5;
+        this.numRR = 0;
+        this.numSJF = 0;
+        this.numFCFS = 0;      
     };
 
     insertar(value,procesos,llegada,algoritmo,prioridad){
@@ -37,11 +40,28 @@ class Cola{
             this.head = nodo;
             this.tail = nodo;
         }
+        if(prioridad==1){
+            this.numRR++;
+        }else if(prioridad==2){
+            this.numSJF++;
+        }
+        else if(prioridad==3){
+            this.numFCFS++;
+        }
+        
         this.length++;
     }
 
     eliminar(){
         const actual = this.head;
+        if(actual.prioridad==1){
+            this.numRR--;
+        }else if(actual.prioridad==2){
+            this.numSJF--;
+        }
+        else if(actual.prioridad==3){
+            this.numFCFS--;
+        }
         this.head = this.head.next;
         this.length--;
         return actual.value;
@@ -72,10 +92,24 @@ class Cola{
             }
         }        
     }
+
+     async atenderSJF(){
+        let actual = this.head;
+        if(actual.procesos!=0){
+            await delay(1);
+            actual.procesos--;
+            this.atenderSJF();
+            //console.log("procesos: " + actual.procesos);
+            imprimirListos();
+        }else{
+            this.eliminar();            
+            this.atender();
+        }
+    }
     
     async atenderFCFS(){
         let actual = this.head;
-        if(actual.procesos>0){
+        if(actual.procesos!=0){
             await delay(1);
             actual.procesos--;
             this.atenderFCFS();
@@ -87,41 +121,39 @@ class Cola{
         }
     }
 
-    async atenderSJF(){
+    async atender(){
+        imprimirListos();
         let actual = this.head;
-        if(actual.procesos>0){
-            await delay(1);
-            actual.procesos--;
-            this.atenderSJF();
-            //console.log("procesos: " + actual.procesos);
-            imprimirListos();
+        await delay(1);
+        console.log("Hay: "+this.numRR+" Round Robin");
+        console.log("Hay: "+this.numSJF+" SJF");
+        console.log("Hay: "+this.numFCFS+" FCFS");
+        if(this.numRR != 0){ //SI HAY RR
+            if(actual.prioridad == 1){
+                this.atenderRoundRobin();
+            }else{
+                this.insertar(actual.value,actual.procesos,actual.llegada,actual.algoritmo,actual.prioridad);
+                this.eliminar();
+                this.atender();         
+            }
+        }else if(this.numSJF != 0){ //SI HAY SJF
+            if(actual.prioridad==2){
+                this.atenderSJF();
+            }else{
+                this.insertar(actual.value,actual.procesos,actual.llegada,actual.algoritmo,actual.prioridad);
+                this.eliminar();
+                this.atender(); 
+            }
+        }else if(this.numFCFS != 0){ // SI HAY FCFS
+            if(actual.prioridad==3){
+                this.atenderFCFS();
+            }else{
+                console.log("prioridad desonocida");
+            }          
         }else{
-            this.eliminar();
-            this.atender();
+            alert("No hay más para atender");
         }
     }
-
-    atender(){
-        imprimirTabla();
-        if(this.length>0){
-            let actual = this.head;
-            if(actual.prioridad==1){
-                console.log("Atendiendo Round Robin");
-                this.atenderRoundRobin();
-            }
-            if(actual.prioridad==2){
-                console.log("Atendiendo SJF");
-                this.atenderSJF();
-            }
-            if(actual.prioridad==3){
-                console.log("Atendiendo FCFS");
-                this.atenderFCFS();
-            }
-        }else{
-            alert("Vacia");
-        }       
-    }
-
 
     mostrar(){
         let actual = this.head;
